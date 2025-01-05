@@ -4,12 +4,12 @@ const {
   registerDev,
   modifyDev,
   removeDev,
-} = require("../service/devsService.js");
-
+} = require("../service/devsService");
+console.log("Dev controller loaded");
 //Operacion que devuelve todos los devs de la BBDD
 
 const getDevs = async (req, res) => {
-  const data = await findAllDevs;
+  const data = await findAllDevs();
 
   res.status(200).json(data);
 };
@@ -47,9 +47,9 @@ const deleteDev = async (req, res) => {
 };
 
 module.exports = {
-    getDevs,
-    getDev,
-    postDev,
-    putDev,
-    deleteDev,
+  getDevs,
+  getDev,
+  postDev,
+  putDev,
+  deleteDev,
 };

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous" />
+    <script type="module" src="registro.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="index.html">List</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="registro.html">+ GAME</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="registro.html">+ DEVELOPER</a>
+        </li>
+      </ul>
+
+      <h1>Register games</h1>
+      <form action="http://localhost:8080/games">
+        <div class="mb-3">
+          <label for="gameName" class="form-label">Name</label>
+          <input class="form-control" type="text" id="gameName" />
+        </div>
+        <div class="mb-3">
+          <label for="gameGenere" class="form-label">Genere</label>
+          <input class="form-control" type="text" id="gameGenere" />
+        </div>
+        <div class="mb-3">
+          <label for="gameYear" class="form-label">Year</label>
+          <input class="form-control" type="number" id="gameYear" />
+        </div>
+        <div class="mb-3">
+          <label for="gameDev" class="form-label">Developer</label>
+          <input class="form-control" type="text" id="gameDev" />
+        </div>
+        <button type="button" class="btn btn-primary" onClick="addGame()">
+          ADD
+        </button>
+      </form>
+    </div>
+  </body>
+</html>

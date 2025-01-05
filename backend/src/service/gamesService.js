@@ -1,21 +1,20 @@
-const db = require("../../knexfile.js").db;
+const db = require("../configuration/database").db;
 
 const findAllGames = async () => {
-  const result = await db("vapor").select("*").from("games");
+  const result = await db("games").select("*");
   return result;
 };
 
-const findGame = async () => {
-  const result = await db("vapor")
+const findGame = async (gameName) => {
+  const result = await db("games")
     .select("*")
-    .from("games")
     .where({ name: gameName })
     .first();
   return result;
 };
 
 const registerGame = async (gameName, gameGenere, gameYear, gameDev) => {
-  const result = await db("vapor").insert({
+  const result = await db("games").insert({
     name: gameName,
     genere: gameGenere,
     year: gameYear,
@@ -25,7 +24,7 @@ const registerGame = async (gameName, gameGenere, gameYear, gameDev) => {
 };
 
 const modifyGame = async (gameName, gameGenere, gameYear, gameDev) => {
-  const result = await db("vapor")
+  const result = await db("games")
     .where({
       name: gameName,
     })
@@ -39,10 +38,7 @@ const modifyGame = async (gameName, gameGenere, gameYear, gameDev) => {
 };
 
 const removeGame = async (gameName) => {
-  const result = await db("vapor")
-    .del()
-    .from("games")
-    .where({ name: gameName });
+  const result = await db("games").del().where({ name: gameName });
 
   return result;
 };
@@ -54,3 +50,5 @@ module.exports = {
   modifyGame,
   removeGame,
 };
+
+console.log("Game services loaded");

@@ -4,12 +4,12 @@ const {
   registerGame,
   modifyGame,
   removeGame,
-} = require("../service/gamesService.js");
+} = require("../service/gamesService");
 
 //Operacion que devuelve todos los devs de la BBDD
 
 const getGames = async (req, res) => {
-  const data = await findAllGames;
+  const data = await findAllGames();
 
   res.status(200).json(data);
 };
@@ -63,3 +63,4 @@ module.exports = {
   putGame,
   deleteGame,
 };
+console.log("Game controller loaded");

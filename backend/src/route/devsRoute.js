@@ -7,12 +7,13 @@ const {
   postDev,
   putDev,
   deleteDev,
-} = require("../controller/devsController.js");
+} = require("../controller/devsController");
 
-router.get("/devs", getDevs);
-router.get("/devs/:dev", getDev);
-router.post("/devs", postDev);
-router.put("/devs/:dev", putDev);
-router.delete("/devs/:dev", deleteDev);
+router.get("/", getDevs);
+router.get("/:dev", getDev);
+router.post("/", postDev);
+router.put("/:dev", putDev);
+router.delete("/:dev", deleteDev);
 
 module.exports = router;
+console.log("Dev routes loaded");

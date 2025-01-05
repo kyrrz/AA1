@@ -1,21 +1,17 @@
-const db = require("../../knexfile.js").db;
+const db = require("../configuration/database").db;
 
 const findAllDevs = async () => {
-  const result = await db("vapor").select("*").from("devs");
+  const result = await db("devs").select("*");
   return result;
 };
 
 const findDev = async () => {
-  const result = await db("vapor")
-    .select("*")
-    .from("devs")
-    .where({ name: devName })
-    .first();
+  const result = await db("devs").select("*").where({ name: devName }).first();
   return result;
 };
 
 const registerDev = async (devName, devCountry, devYear) => {
-  const result = await db("vapor").insert({
+  const result = await db("devs").insert({
     name: devName,
     country: devCountry,
     year: devYear,
@@ -24,7 +20,7 @@ const registerDev = async (devName, devCountry, devYear) => {
 };
 
 const modifyDev = async (devName, devCountry, devYear) => {
-  const result = await db("vapor")
+  const result = await db("devs")
     .where({
       name: devName,
     })
@@ -34,11 +30,11 @@ const modifyDev = async (devName, devCountry, devYear) => {
 };
 
 const removeDev = async (devName) => {
-  const result = await db("vapor").del().from("devs").where({ name: devName });
+  const result = await db("devs").del().where({ name: devName });
 
   return result;
 };
-
+console.log("Dev services loaded");
 module.exports = {
   findAllDevs,
   findDev,

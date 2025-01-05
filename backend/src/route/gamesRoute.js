@@ -7,12 +7,13 @@ const {
   postGame,
   putGame,
   deleteGame,
-} = require("../controller/gamesController.js");
+} = require("../controller/gamesController");
 
-router.get("/games", getGames);
-router.get("/games/:game", getGame);
-router.post("/games", postGame);
-router.put("/games/:game", putGame);
-router.delete("/games/:game", deleteGame);
+router.get("/", getGames);
+router.get("/:game", getGame);
+router.post("/", postGame);
+router.put("/:game", putGame);
+router.delete("/:game", deleteGame);
 
 module.exports = router;
+console.log("Game routes loaded");
