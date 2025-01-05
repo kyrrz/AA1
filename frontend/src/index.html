@@ -6,17 +6,19 @@
     </head>
     <body onload="readGames()">
         <div class="container">
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="index.html">LIST</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="registro.html">ADD GAME</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="registro.html">ADD DEVS</a>
-                </li>
-            </ul>
+             <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="index.html"
+            >GAME LIST</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="registro.html">ADD GAME or DEV</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="modify.html">MODIFY</a>
+        </li>
+      </ul>
 
             <h1>GAME LIST</h1>
             
@@ -26,7 +28,7 @@
                         <th>Name</th>
                         <th>Genere</th>
                         <th>Year</th>
-                        <th>Dev</th>
+                        <th onclick="readDevs()">Dev</th>
                     </tr>
                 </thead>
                   <tbody id="tableBody">

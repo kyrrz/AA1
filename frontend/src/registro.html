@@ -12,38 +12,68 @@
     <div class="container">
       <ul class="nav nav-tabs">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="index.html">List</a>
+          <a class="nav-link" aria-current="page" href="index.html"
+            >GAME LIST</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="registro.html">+ GAME</a>
+          <a class="nav-link active" href="registro.html">ADD GAME or DEV</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="registro.html">+ DEVELOPER</a>
+          <a class="nav-link" href="modify.html">MODIFY</a>
         </li>
       </ul>
-
-      <h1>Register games</h1>
-      <form action="http://localhost:8080/games">
-        <div class="mb-3">
-          <label for="gameName" class="form-label">Name</label>
-          <input class="form-control" type="text" id="gameName" />
+      <div class="col-10">
+        <h1>ADD GAME</h1>
+        <form
+          action="http://localhost:8080/games"
+          method="POST"
+          class="col-md-6">
+          <div class="mb-3 w-50">
+            <label for="gameName" class="form-label">Name</label>
+            <input class="form-control" type="text" id="gameName" required />
+          </div>
+          <div class="mb-3 w-50">
+            <label for="gameGenere" class="form-label">Genere</label>
+            <input class="form-control" type="text" id="gameGenere" />
+          </div>
+          <div class="mb-3 w-50">
+            <label for="gameYear" class="form-label">Year</label>
+            <input class="form-control" type="number" id="gameYear" />
+          </div>
+          <div class="mb-3 w-50">
+            <label for="gameDev" class="form-label">Developer</label>
+            <input class="form-control" type="text" id="gameDev" required />
+          </div>
+          <button type="button" class="btn btn-primary" onClick="addGame()">
+            ADD
+          </button>
+        </form>
+      </div>
+      <div class="col-10 ">
+        <h1>ADD DEV</h1>
+        <form
+          action="http://localhost:8080/devs"
+          method="POST"
+          class="col-md-6">
+          <div class="mb-3 w-50">
+            <label for="devName" class="form-label">Name</label>
+            <input class="form-control" type="text" id="devName" required />
+          </div>
+          <div class="mb-3 w-50">
+            <label for="devCountry" class="form-label">Country</label>
+            <input class="form-control" type="text" id="devCountry" />
+          </div>
+          <div class="mb-3 w-50">
+            <label for="devYear" class="form-label">Year Founded</label>
+            <input class="form-control" type="number" id="devYear" />
+          </div>
+          <button type="button" class="btn btn-primary" onClick="addDev()">
+            ADD
+          </button>
+        </form>
         </div>
-        <div class="mb-3">
-          <label for="gameGenere" class="form-label">Genere</label>
-          <input class="form-control" type="text" id="gameGenere" />
-        </div>
-        <div class="mb-3">
-          <label for="gameYear" class="form-label">Year</label>
-          <input class="form-control" type="number" id="gameYear" />
-        </div>
-        <div class="mb-3">
-          <label for="gameDev" class="form-label">Developer</label>
-          <input class="form-control" type="text" id="gameDev" />
-        </div>
-        <button type="button" class="btn btn-primary" onClick="addGame()">
-          ADD
-        </button>
-      </form>
+      </div>
     </div>
   </body>
 </html>

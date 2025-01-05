@@ -5,6 +5,7 @@ const gamesRoute = require("./route/gamesRoute");
 const devsRoute = require("./route/devsRoute");
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 app.use("/games", gamesRoute);

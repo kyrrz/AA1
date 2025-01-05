@@ -602,10 +602,10 @@ var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _dialogUtilJs = require("./dialogUtil.js");
 var _documentUtilJs = require("./documentUtil.js");
 window.addGame = function() {
-    const name = (0, _documentUtilJs.el)("title").value;
-    const genere = (0, _documentUtilJs.el)("description").value;
-    const year = (0, _documentUtilJs.el)("year").value;
-    const dev = (0, _documentUtilJs.el)("dev").value;
+    const name = (0, _documentUtilJs.el)("gameName").value;
+    const genere = (0, _documentUtilJs.el)("gameGenere").value;
+    const year = (0, _documentUtilJs.el)("gameYear").value;
+    const dev = (0, _documentUtilJs.el)("gameDev").value;
     // TODO Validación de datos
     if (name === "") {
         (0, _dialogUtilJs.notifyError)("El nombre es un campo obligatorio");
@@ -616,39 +616,39 @@ window.addGame = function() {
         return;
     }
     (0, _axiosDefault.default).post("http://localhost:8080/games", {
-        name: gameName,
-        genere: gameGenere,
-        year: gameYear,
-        dev: gameDev
+        name: name,
+        genere: genere,
+        year: year,
+        dev: dev
     });
     // TODO Confirmar al usuario que todo ha ido bien (o mal)
     (0, _dialogUtilJs.notifyOk)("Juego registrado");
     // TODO Limpiar el formulario
-    (0, _documentUtilJs.el)("title").value = "";
-    (0, _documentUtilJs.el)("description").value = "";
-    (0, _documentUtilJs.el)("year").value = "";
-    (0, _documentUtilJs.el)("dev").value = "";
+    (0, _documentUtilJs.el)("gameName").value = "";
+    (0, _documentUtilJs.el)("gameGenere").value = "";
+    (0, _documentUtilJs.el)("gameYear").value = "";
+    (0, _documentUtilJs.el)("gameDev").value = "";
 };
 window.addDev = function() {
-    const name = (0, _documentUtilJs.el)("name").value;
-    const country = (0, _documentUtilJs.el)("country").value;
-    const year = (0, _documentUtilJs.el)("year").value;
+    const name = (0, _documentUtilJs.el)("devName").value;
+    const country = (0, _documentUtilJs.el)("devCountry").value;
+    const year = (0, _documentUtilJs.el)("devYear").value;
     // TODO Validación de datos
     if (name === "") {
         (0, _dialogUtilJs.notifyError)("El titulo es un campo obligatorio");
         return;
     }
     (0, _axiosDefault.default).post("http://localhost:8080/devs", {
-        name: devName,
-        country: devCountry,
-        year: devYear
+        name: name,
+        country: country,
+        year: year
     });
     // TODO Confirmar al usuario que todo ha ido bien (o mal)
     (0, _dialogUtilJs.notifyOk)("Dev registrado");
     // TODO Limpiar el formulario
-    (0, _documentUtilJs.el)("name").value = "";
-    (0, _documentUtilJs.el)("country").value = "";
-    (0, _documentUtilJs.el)("year").value = "";
+    (0, _documentUtilJs.el)("devName").value = "";
+    (0, _documentUtilJs.el)("devCountry").value = "";
+    (0, _documentUtilJs.el)("devYear").value = "";
 };
 
 },{"axios":"jo6P5","./dialogUtil.js":"d4t8s","./documentUtil.js":"aEOtI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["64OVR","kvYlW"], "kvYlW", "parcelRequire94c2")

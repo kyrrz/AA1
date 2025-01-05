@@ -3,10 +3,10 @@ import { notifyError, notifyOk } from "./dialogUtil.js";
 import { el } from "./documentUtil.js";
 
 window.addGame = function () {
-  const name = el("title").value;
-  const genere = el("description").value;
-  const year = el("year").value;
-  const dev = el("dev").value;
+  const name = el("gameName").value;
+  const genere = el("gameGenere").value;
+  const year = el("gameYear").value;
+  const dev = el("gameDev").value;
 
   // TODO Validación de datos
   if (name === "") {
@@ -20,26 +20,26 @@ window.addGame = function () {
   }
 
   axios.post("http://localhost:8080/games", {
-    name: gameName,
-    genere: gameGenere,
-    year: gameYear,
-    dev: gameDev,
+    name: name,
+    genere: genere,
+    year: year,
+    dev: dev,
   });
 
   // TODO Confirmar al usuario que todo ha ido bien (o mal)
   notifyOk("Juego registrado");
 
   // TODO Limpiar el formulario
-  el("title").value = "";
-  el("description").value = "";
-  el("year").value = "";
-  el("dev").value = "";
+  el("gameName").value = "";
+  el("gameGenere").value = "";
+  el("gameYear").value = "";
+  el("gameDev").value = "";
 };
 
 window.addDev = function () {
-  const name = el("name").value;
-  const country = el("country").value;
-  const year = el("year").value;
+  const name = el("devName").value;
+  const country = el("devCountry").value;
+  const year = el("devYear").value;
 
   // TODO Validación de datos
   if (name === "") {
@@ -48,16 +48,16 @@ window.addDev = function () {
   }
 
   axios.post("http://localhost:8080/devs", {
-    name: devName,
-    country: devCountry,
-    year: devYear,
+    name: name,
+    country: country,
+    year: year,
   });
 
   // TODO Confirmar al usuario que todo ha ido bien (o mal)
   notifyOk("Dev registrado");
 
   // TODO Limpiar el formulario
-  el("name").value = "";
-  el("country").value = "";
-  el("year").value = "";
+  el("devName").value = "";
+  el("devCountry").value = "";
+  el("devYear").value = "";
 };

@@ -607,17 +607,28 @@ window.readGames = function() {
         const gameTable = (0, _documentUtil.el)("tableBody");
         gameList.forEach((game)=>{
             const row = document.createElement("tr");
-            row.id = "game-" + game.id;
-            row.innerHTML = (0, _documentUtil.td)(game.name) + (0, _documentUtil.td)(game.genere) + (0, _documentUtil.td)(game.year) + (0, _documentUtil.td)(game.dev) + '<a class="btn btn-warning" href="modify.html?id=' + game.id + '">' + (0, _documentUtil.icon)("edit") + "</a> " + '<a class="btn btn-danger" href="javascript:removeGame(' + game.id + ')">' + (0, _documentUtil.icon)("delete") + "</a>";
+            row.innerHTML = (0, _documentUtil.td)(game.name) + (0, _documentUtil.td)(game.genere) + (0, _documentUtil.td)(game.year) + (0, _documentUtil.td)(game.dev) + '<a class="btn btn-warning" href="modify.html?id=' + game.name + '">' + (0, _documentUtil.icon)("edit") + "</a> " + '<a class="btn btn-danger" href="javascript:removeGame(' + game.name + ')">' + (0, _documentUtil.icon)("delete") + "</a>";
             gameTable.appendChild(row);
         });
     });
 };
-window.removeGame = function(id) {
-    if (confirm("\xbfEst\xe1 seguro de que desea eliminar este juego?")) (0, _axiosDefault.default).delete("http://localhost:8080/games/" + id).then((response)=>{
+var show = true;
+window.readDevs = function() {
+    (0, _axiosDefault.default).get("http://localhost:8080/devs").then((response)=>{
+        const devsList = response.data;
+        const devTable = (0, _documentUtil.el)("tableBody");
+        if (show == true) devsList.forEach((dev)=>{
+            const row = document.createElement("tr");
+            row.innerHTML = (0, _documentUtil.td)(dev.name) + (0, _documentUtil.td)(dev.country) + (0, _documentUtil.td)(dev.year) + '<a class="btn btn-warning" href="modify.html?id=' + dev.name + '">' + (0, _documentUtil.icon)("edit") + "</a> " + '<a class="btn btn-danger" href="javascript:removeGame(' + dev.name + ')">' + (0, _documentUtil.icon)("delete") + devTable.appendChild(row);
+            show = false;
+        });
+    });
+};
+window.removeGame = function(name) {
+    if (confirm("\xbfEst\xe1 seguro de que desea eliminar este juego?")) (0, _axiosDefault.default).delete("http://localhost:8080/games/" + name).then((response)=>{
         if (response.status == 204) {
             (0, _dialogUtil.notifyOk)("Game eliminada correctamente");
-            (0, _documentUtil.el)("game-" + id).remove();
+            (0, _documentUtil.el)(name).remove();
         }
     });
 };
