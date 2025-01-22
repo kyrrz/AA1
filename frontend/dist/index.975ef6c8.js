@@ -605,30 +605,45 @@ window.readGames = function() {
     (0, _axiosDefault.default).get("http://localhost:8080/games").then((response)=>{
         const gameList = response.data;
         const gameTable = (0, _documentUtil.el)("tableBody");
+        gameTable.innerHTML = "";
         gameList.forEach((game)=>{
             const row = document.createElement("tr");
-            row.innerHTML = (0, _documentUtil.td)(game.name) + (0, _documentUtil.td)(game.genere) + (0, _documentUtil.td)(game.year) + (0, _documentUtil.td)(game.dev) + '<a class="btn btn-warning" href="modify.html?id=' + game.name + '">' + (0, _documentUtil.icon)("edit") + "</a> " + '<a class="btn btn-danger" href="javascript:removeGame(' + game.name + ')">' + (0, _documentUtil.icon)("delete") + "</a>";
+            row.setAttribute("id", `game-${encodeURIComponent(game.name)}`);
+            row.innerHTML = (0, _documentUtil.td)(game.name) + (0, _documentUtil.td)(game.genere) + (0, _documentUtil.td)(game.year) + (0, _documentUtil.td)(game.dev) + `<a class="btn btn-warning" href="modifyGame.html?id=${encodeURIComponent(game.name)}">${(0, _documentUtil.icon)("edit")}</a> ` + `<a class="btn btn-danger" href="javascript:removeGame('${encodeURIComponent(game.name)}')">${(0, _documentUtil.icon)("delete")}</a>`;
             gameTable.appendChild(row);
         });
     });
+    (0, _documentUtil.el)("devsShow").ariaLabel("Devs");
 };
-var show = true;
 window.readDevs = function() {
     (0, _axiosDefault.default).get("http://localhost:8080/devs").then((response)=>{
         const devsList = response.data;
         const devTable = (0, _documentUtil.el)("tableBody");
-        if (show == true) devsList.forEach((dev)=>{
+        devTable.innerHTML = "";
+        devsList.forEach((dev)=>{
             const row = document.createElement("tr");
-            row.innerHTML = (0, _documentUtil.td)(dev.name) + (0, _documentUtil.td)(dev.country) + (0, _documentUtil.td)(dev.year) + '<a class="btn btn-warning" href="modify.html?id=' + dev.name + '">' + (0, _documentUtil.icon)("edit") + "</a> " + '<a class="btn btn-danger" href="javascript:removeGame(' + dev.name + ')">' + (0, _documentUtil.icon)("delete") + devTable.appendChild(row);
-            show = false;
+            row.setAttribute("id", `dev-${encodeURIComponent(dev.name)}`);
+            row.innerHTML = (0, _documentUtil.td)(dev.name) + (0, _documentUtil.td)(dev.country) + (0, _documentUtil.td)(dev.year) + `<a class="btn btn-warning" href="modifyDev.html?id=${encodeURIComponent(dev.name)}">${(0, _documentUtil.icon)("edit")}</a> ` + `<a class="btn btn-danger" href="javascript:removeDev('${encodeURIComponent(dev.name)}')">${(0, _documentUtil.icon)("delete")}</a>`;
+            devTable.appendChild(row);
         });
     });
+    (0, _documentUtil.el)("devsShow").remove();
 };
 window.removeGame = function(name) {
-    if (confirm("\xbfEst\xe1 seguro de que desea eliminar este juego?")) (0, _axiosDefault.default).delete("http://localhost:8080/games/" + name).then((response)=>{
-        if (response.status == 204) {
-            (0, _dialogUtil.notifyOk)("Game eliminada correctamente");
-            (0, _documentUtil.el)(name).remove();
+    if (confirm("\xbfEst\xe1 seguro de que desea eliminar este juego?")) (0, _axiosDefault.default).delete("http://localhost:8080/games/" + encodeURIComponent(name)).then((response)=>{
+        if (response.status === 204) {
+            (0, _dialogUtil.notifyOk)("Juego eliminado correctamente");
+            const row = (0, _documentUtil.el)(`game-${encodeURIComponent(name)}`);
+            if (row) row.remove();
+        }
+    });
+};
+window.removeDev = function(name) {
+    if (confirm("\xbfEst\xe1 seguro de que desea eliminar este dev?")) (0, _axiosDefault.default).delete("http://localhost:8080/devs/" + encodeURIComponent(name)).then((response)=>{
+        if (response.status === 204) {
+            (0, _dialogUtil.notifyOk)("Desarrollador eliminado correctamente");
+            const row = (0, _documentUtil.el)(`dev-${encodeURIComponent(name)}`);
+            if (row) row.remove();
         }
     });
 };

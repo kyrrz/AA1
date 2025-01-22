@@ -3,8 +3,10 @@
   "type": "module",
   "source": [
     "src/index.html",
-    "src/registro.html",
-    "src/modify.html"
+    "src/registroDev.html",
+    "src/registroGame.html",
+    "src/modifyDev.html",
+    "src/modifyGame.html"
   ],
   "scripts": {
     "start": "parcel --no-cache",

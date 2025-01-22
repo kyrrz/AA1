@@ -38,7 +38,7 @@ const modifyGame = async (gameName, gameGenere, gameYear, gameDev) => {
 };
 
 const removeGame = async (gameName) => {
-  const result = await db("games").del().where({ name: gameName });
+  const result = await db("games").del("*").where({ name: gameName });
 
   return result;
 };

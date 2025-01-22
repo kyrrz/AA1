@@ -5,7 +5,7 @@ const findAllDevs = async () => {
   return result;
 };
 
-const findDev = async () => {
+const findDev = async (devName) => {
   const result = await db("devs").select("*").where({ name: devName }).first();
   return result;
 };
@@ -30,7 +30,7 @@ const modifyDev = async (devName, devCountry, devYear) => {
 };
 
 const removeDev = async (devName) => {
-  const result = await db("devs").del().where({ name: devName });
+  const result = await db("devs").del("*").where({ name: devName });
 
   return result;
 };
