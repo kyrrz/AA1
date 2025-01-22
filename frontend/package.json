@@ -6,7 +6,9 @@
     "src/registroDev.html",
     "src/registroGame.html",
     "src/modifyDev.html",
-    "src/modifyGame.html"
+    "src/modifyGame.html",
+    "src/login.html",
+    "src/paginaProtegida.html"
   ],
   "scripts": {
     "start": "parcel --no-cache",
