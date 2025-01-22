@@ -3,6 +3,7 @@ const cors = require("cors");
 
 const gamesRoute = require("./route/gamesRoute");
 const devsRoute = require("./route/devsRoute");
+const loginRoute = require("./route/loginRoute");
 
 const app = express();
 app.use(cors());
@@ -10,6 +11,7 @@ app.use(express.json());
 
 app.use("/games", gamesRoute);
 app.use("/devs", devsRoute);
+app.use("/login", loginRoute);
 
 app.get("/", (req, res) => {
   res.send(

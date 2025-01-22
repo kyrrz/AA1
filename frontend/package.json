@@ -6,7 +6,9 @@
     "src/registroDev.html",
     "src/registroGame.html",
     "src/modifyDev.html",
-    "src/modifyGame.html"
+    "src/modifyGame.html",
+    "src/login.html",
+    "src/paginaProtegida.html"
   ],
   "scripts": {
     "start": "parcel --no-cache",
@@ -19,6 +21,7 @@
   },
   "dependencies": {
     "axios": "^1.7.9",
+    "express-validator": "^7.2.1",
     "toastify-js": "^1.12.0"
   }
 }

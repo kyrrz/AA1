@@ -6,9 +6,8 @@
       rel="stylesheet"
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous" />
-    <script type="module" src="modify.js"></script>
   </head>
-  <body onLoad="loadDevs();" class="bg-light">
+  <body class="bg-light">
     <div class="container">
       <ul class="nav nav-tabs mt-2">
         <li class="nav-item">
@@ -25,28 +24,13 @@
         <li class="nav-item">
           <a class="nav-link text-black" href="login.html">LOGIN</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link text-success active" href="login.html"
+            >PAGINA SECRETA!
+          </a>
+        </li>
       </ul>
-
-      <h1 class="display-4 my-5">MODIFICAR</h1>
-      <div class="input-group">
-        <form>
-          <div class="mb-3">
-            <label for="devName" class="form-label">Name</label>
-            <input class="form-control" type="text" id="devName" />
-          </div>
-          <div class="mb-3">
-            <label for="devCountry" class="form-label">Country</label>
-            <input class="form-control" type="text" id="devCountry" />
-          </div>
-          <div class="mb-3">
-            <label for="devYear" class="form-label">Year</label>
-            <input class="form-control" type="text" id="devYear" />
-          </div>
-          <button type="button" class="btn btn-warning" onClick="modifyDev()">
-            Modificar
-          </button>
-        </form>
-      </div>
+      <h1 class="display-4 my-5">HAS INICIADO SESION! FELICIDADES!</h1>
     </div>
   </body>
 </html>
