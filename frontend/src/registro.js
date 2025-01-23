@@ -1,7 +1,7 @@
 import axios from "axios";
 import { notifyError, notifyOk } from "./dialogUtil.js";
 import { el } from "./documentUtil.js";
-import { body, validationResult } from "express-validator";
+
 
 window.addGame = function () {
   const name = el("gameName").value;
@@ -9,7 +9,7 @@ window.addGame = function () {
   const year = el("gameYear").value;
   const dev = el("gameDev").value;
 
-  const errors = validationResult([
+  /*const errors = validationResult([
     body("name").notEmpty().withMessage("El nombre es un campo obligatorio"),
     body("dev").notEmpty().withMessage("El dev es un campo obligatorio"),
   ]);
@@ -18,8 +18,8 @@ window.addGame = function () {
     errors.array().forEach((error) => notifyError(error.msg));
     return;
   }
-
-  /* Validación de datos
+*/
+  // Validación de datos
   if (name === "") {
     notifyError("El nombre es un campo obligatorio");
     return;
@@ -28,7 +28,7 @@ window.addGame = function () {
   if (dev === "") {
     notifyError("El dev es un campo obligatorio");
     return;
-  }*/
+  }
 
   axios.post("http://localhost:8080/games", {
     name: name,
@@ -52,16 +52,15 @@ window.addDev = function () {
   const country = el("devCountry").value;
   const year = el("devYear").value;
 
-  const errors = validationResult([
+  /* const errors = validationResult([
     body("name").notEmpty().withMessage("El nombre es un campo obligatorio"),
-  ]);
+  ]);*/
 
-  /* TODO Validación de datos
+  // Validación de datos cutre
   if (name === "") {
     notifyError("El titulo es un campo obligatorio");
     return;
-  }*/
-
+  }
   axios.post("http://localhost:8080/devs", {
     name: name,
     country: country,
