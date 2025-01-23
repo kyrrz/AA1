@@ -29,40 +29,17 @@ window.loadGames = async function () {
 };
 
 window.modifyGame = async function () {
-  //validar formulario con express-validation
-
-  await body("gameName")
-    .notEmpty()
-    .withMessage("El nombre del juego es obligatorio")
-    .run();
-  await body("gameGenere")
-    .notEmpty()
-    .withMessage("El género del juego es obligatorio")
-    .run();
-  await body("gameYear")
-    .notEmpty()
-    .withMessage("El año del juego es obligatorio")
-    .run();
-  await body("gameDev")
-    .notEmpty()
-    .withMessage("El desarrollador del juego es obligatorio");
-
-  const errors = validationResult();
-  if (!errors.isEmpty()) {
-    notifyError("Por favor, completa todos los campos del formulario.");
-    return;
-  }
   // Recoger datos del formulario
   const gameName = document.getElementById("gameName").value.trim();
   const gameGenere = document.getElementById("gameGenere").value.trim();
   const gameYear = document.getElementById("gameYear").value.trim();
   const gameDev = document.getElementById("gameDev").value.trim();
 
-  /*// Validar formulario
+  // Validar formulario cutre
   if (!gameName || !gameGenere || !gameYear || !gameDev) {
     notifyError("Por favor, completa todos los campos del formulario.");
     return;
-  }*/
+  }
 
   const queryParams = new URLSearchParams(window.location.search);
   const id = queryParams.get("id");
@@ -116,37 +93,16 @@ window.loadDevs = async function () {
 };
 
 window.modifyDev = async function () {
-  //validar formulario con express-validator
-
-  await body("devName")
-    .notEmpty()
-    .withMessage("El nombre del desarrollador es obligatorio")
-    .run();
-  await body("devCountry")
-    .notEmpty()
-    .withMessage("El país del desarrollador es obligatorio")
-    .run();
-  await body("devYear")
-    .notEmpty()
-    .withMessage("El año del desarrollador es obligatorio")
-    .run();
-
-  const errors = validationResult();
-  if (!errors.isEmpty()) {
-    notifyError("Por favor, completa todos los campos del formulario.");
-    return;
-  }
-
   // Recoger datos del formulario
   const devName = document.getElementById("devName").value.trim();
   const devCountry = document.getElementById("devCountry").value.trim();
   const devYear = document.getElementById("devYear").value.trim();
 
-  /*// Validar formulario
+  // Validar formulario cutre
   if (!devName || !devCountry || !devYear) {
     notifyError("Por favor, completa todos los campos del formulario.");
     return;
-  }*/
+  }
 
   const queryParams = new URLSearchParams(window.location.search);
   const id = queryParams.get("id");
