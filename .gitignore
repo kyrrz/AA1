@@ -1,7 +1,5 @@
-<<<<<<< HEAD
 
 /frontend/.parcel-cache
-=======
 # Logs
 logs
 *.log
@@ -137,4 +135,3 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
->>>>>>> ada4ea549f477739d347dd67d84475c501f7ce55

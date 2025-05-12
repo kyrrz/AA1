@@ -1,7 +1,5 @@
-<<<<<<< HEAD
 # AA1
 Actividad de Aprendizaje 1 Entornos de Desarrollo
-=======
 INSTALACION DE PAQUETES
 
 La parte de backend de la AA1 utiliza Node.js, Express, Knex y SQLite3.
@@ -115,4 +113,3 @@ Dependencias de desarrollo
 
     buffer y process: Herramientas para compatibilidad con Node.js en navegadores.
 
->>>>>>> ada4ea549f477739d347dd67d84475c501f7ce55
