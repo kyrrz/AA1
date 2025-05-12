@@ -2,6 +2,8 @@ const knex = require("knex");
 const { config } = require("./configuration");
 
 // Configuración de la base de datos: tipo, ubicación y otros parámetros
+console.log("Configurando base de datos");
+console.log(config.db);
 const db = knex({
   client: "mysql",
   connection: {

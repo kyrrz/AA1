@@ -72,9 +72,8 @@ const postDev = async (req, res) => {
 
   const yearsActive = getYears(req.body.foundation_year);
   const studioValue = getStudioValue(req.body.yearly_income, yearsActive);
-  let devId;
 
-  const returning = await registerDev(
+  await registerDev(
     req.body.name,
     req.body.country,
     req.body.foundation_year,
@@ -83,7 +82,6 @@ const postDev = async (req, res) => {
   );
 
   res.status(201).json({
-    id: devId,
     name: req.body.name,
     country: req.body.country,
     foundation_year: req.body.foundation_year,
@@ -133,7 +131,7 @@ const putDev = async (req, res) => {
   const yearsActive = getYears(req.body.foundation_year);
   const studioValue = getStudioValue(req.body.yearly_income, yearsActive);
 
-  const returning = await modifyDev(
+  await modifyDev(
     req.params.dev,
     req.body.country,
     req.body.foundation_year,
@@ -142,7 +140,6 @@ const putDev = async (req, res) => {
   );
 
   res.status(204).json({
-    id: returning[0].id,
     name: req.body.name,
     country: req.body.country,
     foundation_yearyear: req.body.foundation_year,

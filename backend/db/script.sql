@@ -1,9 +1,6 @@
 CREATE DATABASE IF NOT EXISTS entornosAA2;
 
-CREATE USER IF NOT EXISTS 'alvaro'@'%' IDENTIFIED BY 'alvaro';
-GRANT ALL PRIVILEGES ON entornosAA2.* TO 'alvaro'@'%';
-
-FLUSH PRIVILEGES;
+GRANT ALL PRIVILEGES ON entornosAA2.* TO alvaro;
 
 USE entornosAA2;
 

@@ -18,17 +18,13 @@ const registerDev = async (
   devYearlyIncome,
   devYearsActive
 ) => {
-  const result = await db("devs")
-    .insert({
-      name: devName,
-      country: devCountry,
-      foundation_year: devFoundationYear,
-      yearly_income: devYearlyIncome,
-      years_active: devYearsActive,
-    })
-    .then(async (ids) => {
-      devId = ids[0];
-    });
+  const result = await db("devs").insert({
+    name: devName,
+    country: devCountry,
+    foundation_year: devFoundationYear,
+    yearly_income: devYearlyIncome,
+    years_active: devYearsActive,
+  });
   return result;
 };
 
@@ -48,8 +44,7 @@ const modifyDev = async (
       foundation_year: devFoundationYear,
       yearly_income: devYearlyIncome,
       years_active: devYearsActive,
-    })
-    .returning("id");
+    });
   return result;
 };
 

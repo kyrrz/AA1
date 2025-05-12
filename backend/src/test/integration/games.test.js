@@ -21,10 +21,10 @@ describe("Games API", () => {
           expect(res.body[0]).to.have.property("genere");
           expect(res.body[0]).to.have.property("year");
           expect(res.body[0]).to.have.property("dev");
-          expect(res.body[0].name).to.equal(
-            "The Legend Of Zelda: Breath of the Wild"
+          expect(res.body[0].name).to.equal("Fortnite");
+          expect(res.body[1].name).to.equal(
+            "The Legend of Zelda: Breath of the Wild"
           );
-          expect(res.body[1].name).to.equal("Grand Theft Auto V");
           done();
         }));
   });

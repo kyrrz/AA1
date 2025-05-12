@@ -21,7 +21,7 @@ app.get("/", (req, res) => {
 });
 
 app.listen(config.service.port, () => {
-  console.log("Iniciando backend");
+  console.log("Iniciando backend" + config.service.port);
 });
 
 module.exports = { app };

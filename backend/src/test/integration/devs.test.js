@@ -21,8 +21,8 @@ describe("Devs API", () => {
           expect(res.body[0]).to.have.property("country");
           expect(res.body[0]).to.have.property("foundation_year");
           expect(res.body[0]).to.have.property("yearly_income");
-          expect(res.body[0].name).to.equal("Nintendo");
-          expect(res.body[1].name).to.equal("Rockstar Games");
+          expect(res.body[0].name).to.equal("Epic Games");
+          expect(res.body[1].name).to.equal("Nintendo");
           done();
         }));
   });
@@ -49,11 +49,11 @@ describe("Devs API", () => {
     it("should update one dev", (done) =>
       chai
         .request(app)
-        .put("/devs/Riot Games")
+        .put("/devs/Ubisoft")
         .send({
-          name: "Riot Games",
-          country: "USA",
-          foundation_year: 2011,
+          name: "Ubisoft",
+          country: "France",
+          foundation_year: 1986,
           yearly_income: 100000000,
         })
         .end((err, res) => {
@@ -86,10 +86,10 @@ describe("Devs API", () => {
         .request(app)
         .post("/devs")
         .send({
-          name: "Epic Games",
-          country: "USA",
-          foundation_year: 1992,
-          yearly_income: 100000000,
+          name: "Areyes",
+          country: "Spain",
+          foundation_year: 1999,
+          yearly_income: 10,
         })
         .end((err, res) => {
           if (err) return done(err); // handle request errors
@@ -102,11 +102,11 @@ describe("Devs API", () => {
     });
   });
 
-  describe("DELETE /devs/Epic Games", () => {
+  describe("DELETE /devs/Areyes", () => {
     it("should delete one dev", (done) =>
       chai
         .request(app)
-        .delete("/devs/Epic Games")
+        .delete("/devs/Areyes")
         .end((err, res) => {
           res.should.have.status(204);
           res.body.should.be.a("object");
