@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # AA1
 Actividad de Aprendizaje 1 Entornos de Desarrollo
 =======
@@ -115,4 +114,4 @@ Dependencias de desarrollo
 
     buffer y process: Herramientas para compatibilidad con Node.js en navegadores.
 
->>>>>>> ada4ea549f477739d347dd67d84475c501f7ce55
+
