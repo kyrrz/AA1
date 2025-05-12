@@ -1,0 +1,45 @@
+version: "3.4"
+name: aa2
+services:
+  db:
+    image: mariadb:11.3.2
+    container_name: aa2-db
+    environment:
+      MYSQL_DATABASE: "entornosAA2"
+      MYSQL_PORT: 3306
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_USER: "alvaro"
+      MYSQL_PASSWORD: "alvaro"
+    networks:
+      - network1
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", healthcheck.sh, --connect, --innodb_initialized]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    image: aa2
+    container_name: aa2-api
+    ports:
+      - "8080:8080"
+    networks:
+      - network1
+    depends_on:
+      - db:
+          condition: service_healthy
+
+  frontend:
+    image: aa2
+    container_name: aa2-frontend
+    ports:
+      - "3000:3000"
+    networks:
+      - network1
+    depends_on:
+      - backend
+networks:
+  network1:
+    driver: bridge
