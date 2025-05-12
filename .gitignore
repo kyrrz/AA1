@@ -7,6 +7,9 @@ yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
 
+#database
+vapor.db
+
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
@@ -41,6 +44,8 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
+backend/node_modules/
+frontend/node_modules/
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
@@ -81,7 +86,7 @@ web_modules/
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
-.parcel-cache
+frontend/.parcel-cache
 
 # Next.js build output
 .next

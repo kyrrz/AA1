@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const { config } = require("../src/configuration/configuration");
 
 const gamesRoute = require("./route/gamesRoute");
 const devsRoute = require("./route/devsRoute");
@@ -19,6 +20,8 @@ app.get("/", (req, res) => {
   );
 });
 
-app.listen(8080, () => {
+app.listen(config.service.port, () => {
   console.log("Iniciando backend");
 });
+
+module.exports = { app };
