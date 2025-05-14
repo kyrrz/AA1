@@ -13,23 +13,23 @@ const findGame = async (gameName) => {
   return result;
 };
 
-const registerGame = async (gameName, gameGenere, gameYear, gameDev) => {
+const registerGame = async (gameName, gameGenre, gameYear, gameDev) => {
   const result = await db("games").insert({
     name: gameName,
-    genere: gameGenere,
+    genre: gameGenre,
     year: gameYear,
     dev: gameDev,
   });
   return result;
 };
 
-const modifyGame = async (gameName, gameGenere, gameYear, gameDev) => {
+const modifyGame = async (gameName, gameGenre, gameYear, gameDev) => {
   const result = await db("games")
     .where({
       name: gameName,
     })
     .update({
-      genere: gameGenere,
+      genre: gameGenre,
       year: gameYear,
       dev: gameDev,
     });
@@ -38,7 +38,7 @@ const modifyGame = async (gameName, gameGenere, gameYear, gameDev) => {
 };
 
 const removeGame = async (gameName) => {
-  const result = await db("games").del("*").where({ name: gameName });
+  const result = await db("games").where({ name: gameName }).del();
 
   return result;
 };
@@ -50,5 +50,3 @@ module.exports = {
   modifyGame,
   removeGame,
 };
-
-console.log("Game services loaded");

@@ -14,7 +14,7 @@ window.readGames = function () {
       row.setAttribute("id", `game-${encodeURIComponent(game.name)}`);
       row.innerHTML =
         td(game.name) +
-        td(game.genere) +
+        td(game.genre) +
         td(game.year) +
         td(game.dev) +
         `<a class="btn btn-warning" href="modifyGame.html?id=${encodeURIComponent(
@@ -43,7 +43,7 @@ window.readDevs = function () {
       row.innerHTML =
         td(dev.name) +
         td(dev.country) +
-        td(dev.year) +
+        td(dev.foundation_year) +
         `<a class="btn btn-warning" href="modifyDev.html?id=${encodeURIComponent(
           dev.name
         )}">${icon("edit")}</a> ` +

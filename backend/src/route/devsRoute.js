@@ -1,6 +1,4 @@
 const express = require("express");
-const router = express.Router();
-
 const {
   getDevs,
   getDev,
@@ -8,6 +6,7 @@ const {
   putDev,
   deleteDev,
 } = require("../controller/devsController");
+const router = express.Router();
 
 router.get("/", getDevs);
 router.get("/:dev", getDev);
@@ -16,4 +15,3 @@ router.put("/:dev", putDev);
 router.delete("/:dev", deleteDev);
 
 module.exports = router;
-console.log("Dev routes loaded");

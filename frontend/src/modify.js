@@ -2,7 +2,6 @@ import axios from "axios";
 import { el, icon, td } from "./documentUtil";
 import { notifyOk, notifyError } from "./dialogUtil";
 
-
 window.loadGames = async function () {
   const queryParams = new URLSearchParams(window.location.search);
   const gameName = queryParams.get("id");
@@ -19,7 +18,7 @@ window.loadGames = async function () {
     // Rellenar el formulario con los datos obtenidos
 
     el("gameName").value = game.name;
-    el("gameGenere").value = game.genere;
+    el("gameGenre").value = game.genre;
     el("gameYear").value = game.year;
     el("gameDev").value = game.dev;
   } catch (error) {
@@ -29,14 +28,12 @@ window.loadGames = async function () {
 };
 
 window.modifyGame = async function () {
-  // Recoger datos del formulario
   const gameName = document.getElementById("gameName").value.trim();
-  const gameGenere = document.getElementById("gameGenere").value.trim();
+  const gameGenre = document.getElementById("gameGenre").value.trim();
   const gameYear = document.getElementById("gameYear").value.trim();
   const gameDev = document.getElementById("gameDev").value.trim();
 
-  // Validar formulario cutre
-  if (!gameName || !gameGenere || !gameYear || !gameDev) {
+  if (!gameName || !gameGenre || !gameYear || !gameDev) {
     notifyError("Por favor, completa todos los campos del formulario.");
     return;
   }
@@ -51,7 +48,7 @@ window.modifyGame = async function () {
   try {
     // Llamar al backend para modificar el juego
     const response = await axios.put("http://localhost:8080/games/" + id, {
-      genere: gameGenere,
+      genre: gameGenre,
       year: gameYear,
       developer: gameDev,
     });
@@ -85,7 +82,8 @@ window.loadDevs = async function () {
 
     el("devName").value = dev.name;
     el("devCountry").value = dev.country;
-    el("devYear").value = dev.year;
+    el("devFoundationYear").value = dev.foundation_year;
+    el("devYearlyIncome").value = dev.yearly_income;
   } catch (error) {
     console.error("Error al cargar los datos del desarrollador:", error);
     notifyError("Hubo un error al cargar los datos del desarrollador.");
@@ -96,10 +94,15 @@ window.modifyDev = async function () {
   // Recoger datos del formulario
   const devName = document.getElementById("devName").value.trim();
   const devCountry = document.getElementById("devCountry").value.trim();
-  const devYear = document.getElementById("devYear").value.trim();
+  const devFoundationYear = document
+    .getElementById("devFoundationYear")
+    .value.trim();
+  const devYearlyIncome = document
+    .getElementById("devYearlyIncome")
+    .value.trim();
 
   // Validar formulario cutre
-  if (!devName || !devCountry || !devYear) {
+  if (!devName || !devCountry || !devFoundationYear || !devYearlyIncome) {
     notifyError("Por favor, completa todos los campos del formulario.");
     return;
   }
@@ -116,7 +119,8 @@ window.modifyDev = async function () {
     const response = await axios.put("http://localhost:8080/devs/" + id, {
       name: devName,
       country: devCountry,
-      year: devYear,
+      foundation_year: devFoundationYear,
+      yearly_income: devYearlyIncome,
     });
 
     if (response.status === 204) {

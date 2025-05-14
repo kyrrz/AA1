@@ -2,47 +2,52 @@ import axios from "axios";
 import { notifyError, notifyOk } from "./dialogUtil.js";
 import { el } from "./documentUtil.js";
 
-
 window.addGame = function () {
   const name = el("gameName").value;
-  const genere = el("gameGenere").value;
+  const genre = el("gameGenre").value;
   const year = el("gameYear").value;
   const dev = el("gameDev").value;
 
-  /*const errors = validationResult([
-    body("name").notEmpty().withMessage("El nombre es un campo obligatorio"),
-    body("dev").notEmpty().withMessage("El dev es un campo obligatorio"),
-  ]);
+  // Validación de datos
 
-  if (!errors.isEmpty()) {
-    errors.array().forEach((error) => notifyError(error.msg));
+  if (!name && !genre && !year) {
+    notifyError("Por favor, completa todos los campos del formulario.");
     return;
   }
-*/
-  // Validación de datos
+
   if (name === "") {
     notifyError("El nombre es un campo obligatorio");
     return;
   }
-
+  if (genre === "") {
+    notifyError("El genero es un campo obligatorio");
+    return;
+  }
+  if (year === "") {
+    notifyError("El año es un campo obligatorio");
+    return;
+  }
   if (dev === "") {
     notifyError("El dev es un campo obligatorio");
     return;
   }
 
-  axios.post("http://localhost:8080/games", {
+  const result = axios.post("http://localhost:8080/games", {
     name: name,
-    genere: genere,
+    genre: genre,
     year: year,
     dev: dev,
   });
 
-  // TODO Confirmar al usuario que todo ha ido bien (o mal)
-  notifyOk("Juego registrado");
-
-  // TODO Limpiar el formulario
+  if (result.status !== 201) {
+    notifyError("Error al registrar el juego, Developer no encontrado");
+    return;
+  } else {
+    notifyOk("Juego registrado");
+  }
+  // Limpiar el formulario
   el("gameName").value = "";
-  el("gameGenere").value = "";
+  el("gameGenre").value = "";
   el("gameYear").value = "";
   el("gameDev").value = "";
 };
@@ -50,28 +55,38 @@ window.addGame = function () {
 window.addDev = function () {
   const name = el("devName").value;
   const country = el("devCountry").value;
-  const year = el("devYear").value;
+  const foundation_year = el("devFoundationYear").value;
+  const yearly_income = el("devYearlyIncome").value;
 
-  /* const errors = validationResult([
-    body("name").notEmpty().withMessage("El nombre es un campo obligatorio"),
-  ]);*/
-
-  // Validación de datos cutre
   if (name === "") {
-    notifyError("El titulo es un campo obligatorio");
+    notifyError("El nombre es un campo obligatorio");
     return;
   }
-  axios.post("http://localhost:8080/devs", {
+  if (country === "") {
+    notifyError("El pais es un campo obligatorio");
+    return;
+  }
+  if (foundation_year === "") {
+    notifyError("La fecha de fundación es un campo obligatorio");
+    return;
+  }
+  const result = axios.post("http://localhost:8080/devs", {
     name: name,
     country: country,
-    year: year,
+    foundation_year: foundation_year,
+    yearly_income: yearly_income,
   });
 
-  // TODO Confirmar al usuario que todo ha ido bien (o mal)
-  notifyOk("Dev registrado");
+  if (result.status !== 201) {
+    notifyError("Error al registrar desarrollador");
+    return;
+  } else {
+    notifyOk("Desarrollador registrado");
+  }
 
   // TODO Limpiar el formulario
   el("devName").value = "";
   el("devCountry").value = "";
-  el("devYear").value = "";
+  el("devFoundationYear").value = "";
+  el("devYearlyIncome").value = "";
 };

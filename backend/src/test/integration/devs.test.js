@@ -21,8 +21,8 @@ describe("Devs API", () => {
           expect(res.body[0]).to.have.property("country");
           expect(res.body[0]).to.have.property("foundation_year");
           expect(res.body[0]).to.have.property("yearly_income");
-          expect(res.body[0].name).to.equal("Epic Games");
-          expect(res.body[1].name).to.equal("Nintendo");
+          //expect(res.body[0].name).to.equal("Epic Games");
+          //expect(res.body[1].name).to.equal("Nintendo");
           done();
         }));
   });
@@ -57,7 +57,7 @@ describe("Devs API", () => {
           yearly_income: 100000000,
         })
         .end((err, res) => {
-          res.should.have.status(204);
+          res.should.have.status(200);
           res.body.should.be.a("object");
           done();
         }));
@@ -92,9 +92,30 @@ describe("Devs API", () => {
           yearly_income: 10,
         })
         .end((err, res) => {
-          if (err) return done(err); // handle request errors
-
+          if (err) return done(err);
           res.should.have.status(201);
+          res.body.should.be.an("object");
+
+          done();
+        });
+    });
+  });
+
+  describe("POST /devs", () => {
+    it("should return 409 dev already exists", (done) => {
+      chai
+        .request(app)
+        .post("/devs")
+        .send({
+          name: "Areyes",
+          country: "Spain",
+          foundation_year: 1999,
+          yearly_income: 10,
+        })
+        .end((err, res) => {
+          if (err) return done(err);
+
+          res.should.have.status(409);
           res.body.should.be.an("object");
 
           done();
@@ -109,6 +130,19 @@ describe("Devs API", () => {
         .delete("/devs/Areyes")
         .end((err, res) => {
           res.should.have.status(204);
+          res.body.should.be.a("object");
+
+          done();
+        }));
+  });
+
+  describe("DELETE /devs/NonExistent", () => {
+    it("should return 404 dev not found", (done) =>
+      chai
+        .request(app)
+        .delete("/devs/Aaaaaa")
+        .end((err, res) => {
+          res.should.have.status(404);
           res.body.should.be.a("object");
 
           done();

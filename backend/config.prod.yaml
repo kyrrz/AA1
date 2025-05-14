@@ -1,0 +1,9 @@
+db:
+  host: db
+  port: 3306
+  user: alvaro
+  password: alvaro
+  database: entornosAA2
+
+service:
+  port: 8080
