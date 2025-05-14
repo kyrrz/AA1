@@ -1,6 +1,4 @@
 const express = require("express");
-const router = express.Router();
-
 const {
   getGames,
   getGame,
@@ -8,6 +6,7 @@ const {
   putGame,
   deleteGame,
 } = require("../controller/gamesController");
+const router = express.Router();
 
 router.get("/", getGames);
 router.get("/:game", getGame);
@@ -16,4 +15,3 @@ router.put("/:game", putGame);
 router.delete("/:game", deleteGame);
 
 module.exports = router;
-console.log("Game routes loaded");

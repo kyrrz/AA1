@@ -8,11 +8,12 @@ const {
 
 const { getYears } = require("../dateUtils");
 const { getStudioValue } = require("../economyUtils");
-console.log("Dev controller loaded");
+
 //Operacion que devuelve todos los devs de la BBDD
 
 const getDevs = async (req, res) => {
   const data = await findAllDevs();
+
   if (data === undefined) {
     res.status(404).json({
       status: "not-found",
@@ -26,9 +27,14 @@ const getDevs = async (req, res) => {
 //Operacion que devuelve un dev determinado
 
 const getDev = async (req, res) => {
+  if (req.params.dev === undefined || req.params.dev === "") {
+    res.status(400).json({
+      status: "bad-request",
+      message: "Dev name is required",
+    });
+    return;
+  }
   const data = await findDev(req.params.dev);
-  console.log(data);
-
   if (data === undefined) {
     res.status(404).json({
       status: "not-found",
@@ -36,40 +42,43 @@ const getDev = async (req, res) => {
     });
     return;
   }
-
   res.status(200).json(data);
 };
 
 //Operacion que registra un nuevo dev
 
 const postDev = async (req, res) => {
+  devFound = await findDev(req.body.name);
+  if (devFound) {
+    return res.status(409).json({
+      status: "conflict",
+      message: "Dev already registered",
+    });
+  }
+
   if (req.body.name === undefined || req.body.name === "") {
-    res.status(400).json({
+    return res.status(400).json({
       status: "bad-request",
       message: "Dev name is required",
     });
-    return;
   }
 
   if (req.body.country === undefined || req.body.country === "") {
-    res.status(400).json({
+    return res.status(400).json({
       status: "bad-request",
       message: "Dev country is required",
     });
-    return;
   }
 
   if (
     req.body.foundation_year === undefined ||
     req.body.foundation_year === ""
   ) {
-    res.status(400).json({
+    return res.status(400).json({
       status: "bad-request",
       message: "Dev year is required",
     });
-    return;
   }
-
   const yearsActive = getYears(req.body.foundation_year);
   const studioValue = getStudioValue(req.body.yearly_income, yearsActive);
 
@@ -85,12 +94,12 @@ const postDev = async (req, res) => {
     name: req.body.name,
     country: req.body.country,
     foundation_year: req.body.foundation_year,
-    yearsActive: yearsActive,
-    studioValue: studioValue,
+    yearly_income: req.body.yearly_income,
+    years_active: yearsActive,
+    studio_value: studioValue,
     status: "created",
   });
 };
-
 //Operacion que modifica los datos de un dev en la BBDD
 
 const putDev = async (req, res) => {
@@ -139,10 +148,11 @@ const putDev = async (req, res) => {
     yearsActive
   );
 
-  res.status(204).json({
+  res.status(200).json({
     name: req.body.name,
     country: req.body.country,
-    foundation_yearyear: req.body.foundation_year,
+    foundation_year: req.body.foundation_year,
+    yearly_income: req.body.yearly_income,
     yearsActive: yearsActive,
     studioValue: studioValue,
     status: "modified",
@@ -152,9 +162,16 @@ const putDev = async (req, res) => {
 //Operacion que elimina un dev de la BBDD
 
 const deleteDev = async (req, res) => {
-  await removeDev(req.params.dev);
+  const removed = await removeDev(req.params.dev);
+  if (!removed) {
+    res.status(404).json({
+      status: "not-found",
+      message: "Dev not found",
+    });
+    return;
+  }
 
-  res.status(204).json({});
+  res.status(204).json();
 };
 
 module.exports = {

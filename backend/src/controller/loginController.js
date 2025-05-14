@@ -25,4 +25,3 @@ exports.login = [
     res.json({ message: "Login exitoso", username });
   },
 ];
-console.log("login controller");

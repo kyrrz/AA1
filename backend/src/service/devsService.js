@@ -8,7 +8,8 @@ const findAllDevs = async () => {
 
 const findDev = async (devName) => {
   const result = await db("devs").select("*").where({ name: devName }).first();
-  return result || null;
+
+  return result;
 };
 
 const registerDev = async (
@@ -49,11 +50,11 @@ const modifyDev = async (
 };
 
 const removeDev = async (devName) => {
-  const result = await db("devs").del("*").where({ name: devName });
+  const result = await db("devs").where({ name: devName }).del();
 
   return result;
 };
-console.log("Dev services loaded");
+
 module.exports = {
   findAllDevs,
   findDev,
