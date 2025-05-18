@@ -1,4 +1,4 @@
 FROM node:alpine
 COPY ./ ./
-RUN npm install
+RUN npm cache clean --force && npm install
 CMD ["npm", "run", "start-dev"]
