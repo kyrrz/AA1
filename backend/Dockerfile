@@ -1,4 +1,4 @@
 FROM node:alpine
 COPY ./ ./
 RUN npm install
-CMD ["npm", "run", "start-prod"]
+CMD ["npm", "run", "start-dev"]

@@ -90,14 +90,4 @@ exports.mockGameRegisterResponse = {
   genre: "Sci-Fi RPG",
   year: 2025,
   dev: "Rockstar Games",
-  status: "created",
-};
-
-// Mock game update response
-exports.mockGameUpdateResponse = {
-  name: "Fortnite",
-  genre: "Battle Royale MOBA",
-  year: 2017,
-  dev: "Epic Games",
-  status: "modified",
 };

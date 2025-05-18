@@ -5,13 +5,10 @@ services:
     image: mariadb:11.3.2
     container_name: aa2-db
     environment:
-      MYSQL_DATABASE: "entornosAA2"
       MYSQL_PORT: 3306
       MYSQL_ROOT_PASSWORD: "root"
       MYSQL_USER: "alvaro"
       MYSQL_PASSWORD: "alvaro"
-    networks:
-      - network1
     volumes:
       - ./db:/docker-entrypoint-initdb.d
     healthcheck:
@@ -19,7 +16,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-
+    networks:
+      - network1
   backend:
     image: aa2-be
     container_name: aa2-api
@@ -37,7 +35,6 @@ services:
       - "1234:1234"
     networks:
       - network1
-
 networks:
   network1:
     driver: bridge

@@ -68,9 +68,7 @@ describe("Games API", () => {
           expect(res.body).to.have.property("dev");
           done();
         }));
-  });
 
-  describe("POST /games", () => {
     it("should return 409 game already registered", (done) =>
       chai
         .request(app)
@@ -87,9 +85,7 @@ describe("Games API", () => {
           expect(res.body).to.have.property("status");
           done();
         }));
-  });
 
-  describe("POST /games", () => {
     it("should return 404 developer not found", (done) =>
       chai
         .request(app)
@@ -124,9 +120,7 @@ describe("Games API", () => {
           res.body.should.be.a("object");
           done();
         }));
-  });
 
-  describe("PUT /games/:game", () => {
     it("should return 404 game not found", (done) =>
       chai
         .request(app)
@@ -154,9 +148,7 @@ describe("Games API", () => {
           res.body.should.be.a("object");
           done();
         }));
-  });
 
-  describe("DELETE /games/:game", () => {
     it("should return 404 game not found", (done) =>
       chai
         .request(app)

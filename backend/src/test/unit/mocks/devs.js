@@ -56,14 +56,6 @@ exports.mockDevToGet = {
   years_active: 25,
 };
 
-exports.mockDevRegister = {
-  name: "SantiFaci",
-  country: "Spain",
-  foundation_year: 2024,
-  yearly_income: 100000000,
-  years_active: 1,
-};
-
 exports.mockDevToModify = {
   name: "Ubisoft",
   country: "France",
@@ -77,6 +69,14 @@ exports.mockDevResponse = {
   foundation_year: 1999,
   yearly_income: 10000,
   years_active: 26,
+};
+
+exports.mockDevRegister = {
+  name: "SantiFaci",
+  country: "Spain",
+  foundation_year: 2024,
+  yearly_income: 100000000,
+  years_active: 1,
 };
 
 exports.mockDevRegisterResponse = {

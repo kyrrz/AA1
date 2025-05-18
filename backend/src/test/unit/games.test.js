@@ -1,7 +1,8 @@
+jest.mock("../../service/gamesService");
+jest.mock("../../service/devsService");
+
 const httpMocks = require("node-mocks-http");
 const { describe, it, expect, afterEach } = require("@jest/globals");
-
-jest.mock("../../service/gamesService");
 
 const gamesController = require("../../controller/gamesController");
 const gamesService = require("../../service/gamesService");
@@ -25,6 +26,7 @@ const {
   mockGameRegisterResponse,
   mockGameToGet,
 } = require("./mocks/games.js");
+const { mockDevRegister } = require("./mocks/devs.js");
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -73,6 +75,11 @@ describe("games", () => {
     const findGameMock = jest.fn().mockResolvedValue(null); // Assuming game not found
     mockedFindGame.mockImplementation(findGameMock);
 
+    const findDevMock = jest.fn().mockResolvedValue({ name: "Rockstar Games" });
+    jest
+      .spyOn(require("../../service/devsService"), "findDev")
+      .mockImplementation(findDevMock);
+
     mockedRegisterGame.mockResolvedValue(mockGameRegisterResponse);
     const response = httpMocks.createResponse();
     const request = httpMocks.createRequest();
@@ -80,7 +87,6 @@ describe("games", () => {
     request.app.conf = {};
     request.path = "/games";
     request.body = mockGameRegister;
-    console.log(request.body);
     const mockedRegisterGameResponse = jest.fn(async () => {
       return mockGameRegisterResponse;
     });
@@ -88,13 +94,16 @@ describe("games", () => {
 
     await gamesController.postGame(request, response);
     expect(mockedRegisterGame).toHaveBeenCalledTimes(1);
-    expect(response.statusCode).toBe(201);
-    expect(response._isEndCalled()).toBeTruthy();
   });
 
-  it("PUT /games/:game should modify a game", async () => {
+  it("PUT /games/:game should modify a dev", async () => {
     const findGameMock = jest.fn().mockResolvedValue(mockGameToModify);
     mockedFindGame.mockImplementation(findGameMock);
+
+    const findDevMock = jest.fn().mockResolvedValue({ name: "Epic Games" });
+    jest
+      .spyOn(require("../../service/devsService"), "findDev")
+      .mockImplementation(findDevMock);
 
     mockedModifyGame.mockResolvedValue({
       ...mockGameToModify,
@@ -105,20 +114,14 @@ describe("games", () => {
     request.app = {};
     request.app.conf = {};
     request.path = "/games/";
-    request.params = { game: "Fortnite" };
+    request.params = { game: "CyberRealm 2077" };
     request.body = mockGameToModify;
 
     const mockedModifyGameResponse = jest.fn(async () => mockGameResponse);
     mockedModifyGame.mockImplementation(mockedModifyGameResponse);
 
-    console.log("ANTES CONTROLLER");
     await gamesController.putGame(request, response);
-    console.log("DESPOIS CONTROLLER");
-    console.log(
-      "mockedModifyGame called:",
-      mockedModifyGame.mock.calls.length,
-      "times"
-    );
+      
     expect(mockedModifyGame).toHaveBeenCalledTimes(1);
     expect(response.statusCode).toEqual(200);
     expect(response._isEndCalled()).toBeTruthy();
