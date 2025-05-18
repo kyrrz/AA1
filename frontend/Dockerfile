@@ -1,13 +1,9 @@
-FROM node:alpine
+FROM node:18
 
 
-# Copia solo package.json y lock
-COPY backend/package*.json ./
-
-# Instala dependencias
+COPY frontend/package*.json ./
 RUN npm install
 
-# Copia el resto del backend
-COPY backend/ ./
-RUN npm install
-CMD ["npm", "start"]
+COPY frontend/ ./
+
+CMD ["npm", "run", "start"]
