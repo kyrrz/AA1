@@ -12,5 +12,5 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Build the Docker image
-        run: docker build . --file ./frontend/Dockerfile --tag aa2-fe:$(date +%s)
+      - name: Build Frontend Image
+        run: docker build --no-cache . --file ./frontend/Dockerfile --tag aa2-fe:$(date +%s)
