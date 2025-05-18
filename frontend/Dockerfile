@@ -1,10 +1,5 @@
 FROM node:alpine
-
-WORKDIR /app
-
-COPY package*.json ./
+WORKDIR /home
+COPY ./ ./
 RUN npm ci
-
-COPY . .
-
 CMD ["npm", "start"]
