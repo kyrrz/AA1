@@ -1,7 +1,7 @@
+jest.mock("../../service/devsService");
+
 const httpMocks = require("node-mocks-http");
 const { describe, it, expect, afterEach } = require("@jest/globals");
-
-jest.mock("../../service/devsService");
 
 const devsController = require("../../controller/devsController");
 const devsService = require("../../service/devsService");
@@ -85,7 +85,6 @@ describe("devs", () => {
     request.app.conf = {};
     request.path = "/devs";
     request.body = mockDevRegister;
-    console.log(request.body);
     const mockedRegisterDevResponse = jest.fn(async () => {
       return mockDevRegisterResponse;
     });
@@ -120,14 +119,8 @@ describe("devs", () => {
     const mockedModifyDevResponse = jest.fn(async () => mockDevResponse);
     mockedModifyDev.mockImplementation(mockedModifyDevResponse);
 
-    console.log("ANTES CONTROLLER");
     await devsController.putDev(request, response);
-    console.log("DESPOIS CONTROLLER");
-    console.log(
-      "mockedModifyDev called:",
-      mockedModifyDev.mock.calls.length,
-      "times"
-    );
+
     expect(mockedModifyDev).toHaveBeenCalledTimes(1);
     expect(response.statusCode).toEqual(200);
     expect(response._isEndCalled()).toBeTruthy();

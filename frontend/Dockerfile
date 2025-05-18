@@ -1,5 +1,5 @@
 FROM node:alpine
 WORKDIR /home
 COPY ./ ./
-RUN npm install
+RUN npm ci --include=dev
 CMD ["npm", "start"]

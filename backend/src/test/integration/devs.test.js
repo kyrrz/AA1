@@ -61,9 +61,7 @@ describe("Devs API", () => {
           res.body.should.be.a("object");
           done();
         }));
-  });
 
-  describe("PUT /devs/:dev", () => {
     it("should return 404 if dev not found", (done) =>
       chai
         .request(app)
@@ -80,6 +78,7 @@ describe("Devs API", () => {
           done();
         }));
   });
+
   describe("POST /devs", () => {
     it("should create a new dev", (done) => {
       chai
@@ -99,9 +98,7 @@ describe("Devs API", () => {
           done();
         });
     });
-  });
 
-  describe("POST /devs", () => {
     it("should return 409 dev already exists", (done) => {
       chai
         .request(app)
@@ -123,7 +120,7 @@ describe("Devs API", () => {
     });
   });
 
-  describe("DELETE /devs/Areyes", () => {
+  describe("DELETE /devs/:dev", () => {
     it("should delete one dev", (done) =>
       chai
         .request(app)
@@ -134,9 +131,7 @@ describe("Devs API", () => {
 
           done();
         }));
-  });
 
-  describe("DELETE /devs/NonExistent", () => {
     it("should return 404 dev not found", (done) =>
       chai
         .request(app)
