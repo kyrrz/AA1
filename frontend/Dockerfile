@@ -1,15 +1,13 @@
-FROM node:lts
+FROM node:alpine
 
-WORKDIR /usr/src/app
 
-# Copy both package.json and package-lock.json
-COPY package*.json ./
+# Copia solo package.json y lock
+COPY backend/package*.json ./
 
-# Install dependencies using npm ci
-RUN npm ci
+# Instala dependencias
+RUN npm install
 
-# Copy the remaining application files
-COPY ./ ./
-
-# Specify the command to run the application
+# Copia el resto del backend
+COPY backend/ ./
+RUN npm install
 CMD ["npm", "start"]
